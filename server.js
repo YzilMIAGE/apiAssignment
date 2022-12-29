@@ -8,9 +8,9 @@ let user = require("./routes/user");
 let mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
-// const uri =
-//   "mongodb+srv://clizy:1zuCPJMd4jGxhcmv@assignement.qitimgc.mongodb.net/assignments?retryWrites=true&w=majority";
-const uri = "mongodb://localhost:27017/assignments";
+const uri =
+  "mongodb+srv://clizy:1zuCPJMd4jGxhcmv@assignement.qitimgc.mongodb.net/assignments?retryWrites=true&w=majority";
+// const uri = "mongodb://localhost:27017/assignments";
 
 const options = {
   useNewUrlParser: true,

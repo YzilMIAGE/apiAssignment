@@ -1,20 +1,46 @@
 let Assignment = require("../model/assignment");
 
+const ENUM_RENDU = {
+  RENDU: 1,
+  NON_RENDU: 2,
+};
+
 // Récupérer tous les assignments (GET)
 function getAssignments(req, res) {
-  let aggregateQuery = Assignment.aggregate();
+  let aQueryFilterParams = {};
+  const aNameSearch = req.query.search;
+  const aRendu = req.query.rendu;
+
+  if (aNameSearch) {
+    aQueryFilterParams = { nom: { $regex: aNameSearch, $options: "i" } };
+  }
+
+  if (aRendu == ENUM_RENDU.RENDU) {
+    aQueryFilterParams = { ...aQueryFilterParams, rendu: true };
+  } else if (aRendu == ENUM_RENDU.NON_RENDU) {
+    aQueryFilterParams = { ...aQueryFilterParams, rendu: false };
+  }
+
+  const aQueryParams = [
+    {
+      $match: {
+        ...aQueryFilterParams,
+      },
+    },
+  ];
+
+  const aggregateQuery = Assignment.aggregate(aQueryParams);
   Assignment.aggregatePaginate(
     aggregateQuery,
     {
       page: parseInt(req.query.page) || 1,
-      limit: parseInt(req.query.limit) || 10,
+      limit: parseInt(req.query.limit) || 20,
     },
     (err, assignments) => {
-      console.log(assignments);
       if (err) {
-        res.send(err);
+        return res.send(err);
       }
-      res.send(assignments);
+      return res.send(assignments);
     }
   );
 }
@@ -23,7 +49,7 @@ function getAssignments(req, res) {
 function getAssignment(req, res) {
   let assignmentId = req.params.id;
 
-  Assignment.findOne({ id: assignmentId }, (err, assignment) => {
+  Assignment.findById(assignmentId, (err, assignment) => {
     if (err) {
       res.send(err);
     }
@@ -39,9 +65,6 @@ function postAssignment(req, res) {
   assignment.dateDeRendu = req.body.dateDeRendu;
   assignment.rendu = req.body.rendu;
 
-  console.log("POST assignment reçu :");
-  console.log(assignment);
-
   assignment.save((err) => {
     if (err) {
       res.send("cant post assignment ", err);
@@ -52,8 +75,6 @@ function postAssignment(req, res) {
 
 // Update d'un assignment (PUT)
 function updateAssignment(req, res) {
-  console.log("UPDATE recu assignment : ");
-  console.log(req.body);
   Assignment.findByIdAndUpdate(
     req.body._id,
     req.body,

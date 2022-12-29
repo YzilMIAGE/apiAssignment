@@ -8,10 +8,18 @@ http://miageprojet2.unice.fr/Intranet_de_Michel_Buffa/M1_MIAGE_2021-2022_-_Techn
 
 Ouvrir un terminal
 Executer
-`git clone https://github.com/YzilMIAGE/apiAssignment.git`
-`cd apiAssignment`
-`npm i` ou `npm install`
-`node server.js`
+`git clone https://github.com/YzilMIAGE/apiAssignment.git` 
+
+
+`cd apiAssignment` 
+
+
+`npm i` ou `npm install` 
+
+
+`node server.js` 
+
+
 
 ## Explication du projet
 

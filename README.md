@@ -4,22 +4,21 @@ Backend Node du projet Angular à rendre pour le 4 janvier 2023 suivant ces règ
 
 http://miageprojet2.unice.fr/Intranet_de_Michel_Buffa/M1_MIAGE_2021-2022_-_Technologies_Web_-_Angular/Mini-projet_Angular_M1_Miage_2022-2023
 
-## Récuperer et éxecuter le projet
+## Adresse du backend en ligne
 
-Ouvrir un terminal
-Executer
-`git clone https://github.com/YzilMIAGE/apiAssignment.git` 
+https://angular-back-rendu.herokuapp.com
 
+## Récuperer et éxecuter le backend en local
 
-`cd apiAssignment` 
+Ouvrir un terminal et éxecuter
 
+`git clone https://github.com/YzilMIAGE/apiAssignment.git`
 
-`npm i` ou `npm install` 
+`cd apiAssignment`
 
+`npm i` ou `npm install`
 
-`node server.js` 
-
-
+`node server.js`
 
 ## Explication du projet
 
